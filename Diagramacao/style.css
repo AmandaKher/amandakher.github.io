@@ -1,0 +1,83 @@
+.lorem{
+    background-color: rgb(145, 84, 194);
+    padding-bottom: 30px;
+    text-align: left;
+    padding-left: 20px;
+}
+.welcome{
+    background-color: rgb(108, 41, 172);
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.vivimus {
+    background-color: rgb(145, 84, 194);
+    padding-top: 5px;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.ele {
+    background-color: rgb(108, 41, 172);
+    padding-top: 1px;
+    padding-bottom: 5px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.ultimo{
+    background-color: rgb(108, 41, 172);
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+#titulo {
+    text-align: center;
+}
+
+
+
+.minha-div {
+    width: 80%; 
+    max-width: 600px; 
+    margin: 10px auto; 
+    padding: 10px; 
+    background-color: #9a6ab8ea; 
+    color: black; 
+    border: 0 solid #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center
+}
+
+
+.div {
+    width: 80%; 
+    max-width: 600px; 
+    margin: 10px auto; 
+    padding: 10px; 
+    background-color: rgb(108, 41, 172); 
+    color: black; 
+    border: 0 solid #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center
+}
+
+.cent p{
+    display: block;
+    text-align: center;
+}
+
+a :active {
+    color: rgb(197, 174, 224);
+}
+
+a {
+    color: rgb(70, 44, 102)
+}
+
