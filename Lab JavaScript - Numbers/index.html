@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lab JavaScript - Numbers</title>
+</head>
+<body>
+    <section>
+        <h2>Computador de Bordo</h2>
+        <label>Informe quantos R$ dispõe:</label>
+        <input id="q1-dinheiro" type="number" placeholder="999.99">
+        <button onclick="calcularCombustivel()">Calcular</button>
+        <ul id="q1-result"></ul>
+    </section>
+    
+    <section>
+        <h2>Calculadora de IMC</h2>
+        <label>Peso (kg):</label>
+        <input id="q2-peso" type="number" placeholder="70">
+        <label>Altura (m):</label>
+        <input id="q2-altura" type="number" step="0.01" placeholder="1.75">
+        <button onclick="calcularIMC()">Calcular</button>
+        <p id="q2-result"></p>
+    </section>
+    
+    <section>
+        <h2>Simulação de Lançamentos de Dados</h2>
+        <button onclick="simularLancamentos()">Simular</button>
+        <table id="q3-result"></table>
+    </section>
+    
+    <section>
+        <h2>Inversor de Nomes</h2>
+        <input id="q4-nome" type="text" placeholder="Digite um nome">
+        <button onclick="adicionarNome()">Adicionar</button>
+        <ul id="q4-nomes"></ul>
+        <button onclick="inverterNomes()">Inverter</button>
+        <ul id="q4-nomes-invertidos"></ul>
+    </section>
+    
+    <section>
+        <h2>Verificação de Palíndromo</h2>
+        <input id="q5-palavra" type="text" placeholder="Digite uma palavra">
+        <button onclick="verificarPalindromo()">Testar</button>
+        <p id="q5-result"></p>
+    </section>
+
+    <script>
+        function calcularCombustivel() {
+            let dinheiro = parseFloat(document.getElementById('q1-dinheiro').value);
+            let litros = dinheiro / 7;
+            let autonomia = litros * 20;
+            document.getElementById('q1-result').innerHTML = `<li>Você abastecerá ${litros.toFixed(2)} litros</li><li>Sua autonomia é de ${autonomia.toFixed(2)} km</li>`;
+        }
+        
+        function calcularIMC() {
+            let peso = parseFloat(document.getElementById('q2-peso').value);
+            let altura = parseFloat(document.getElementById('q2-altura').value);
+            let imc = peso / (altura * altura);
+            document.getElementById('q2-result').innerText = `Seu IMC é ${imc.toFixed(2)}`;
+        }
+        
+        function simularLancamentos() {
+            let resultados = [0, 0, 0, 0, 0, 0];
+            for (let i = 0; i < 1000000; i++) {
+                let face = Math.floor(Math.random() * 6);
+                resultados[face]++;
+            }
+            let tabela = `<tr><th>Face</th><th>Ocorrências</th></tr>`;
+            for (let i = 0; i < 6; i++) {
+                tabela += `<tr><td>${i+1}</td><td>${resultados[i]}</td></tr>`;
+            }
+            document.getElementById('q3-result').innerHTML = tabela;
+        }
+        
+        function adicionarNome() {
+            let nome = document.getElementById('q4-nome').value;
+            let lista = document.getElementById('q4-nomes');
+            lista.innerHTML += `<li>${nome}</li>`;
+        }
+        
+        function inverterNomes() {
+            let lista = document.getElementById('q4-nomes').getElementsByTagName('li');
+            let invertida = document.getElementById('q4-nomes-invertidos');
+            invertida.innerHTML = '';
+            for (let li of lista) {
+                invertida.innerHTML += `<li>${li.innerText.split('').reverse().join('')}</li>`;
+            }
+        }
+        
+        function verificarPalindromo() {
+            let palavra = document.getElementById('q5-palavra').value;
+            let invertida = palavra.split('').reverse().join('');
+            document.getElementById('q5-result').innerText = palavra === invertida ? "É um palíndromo!" : "Não é um palíndromo!";
+        }
+    </script>
+</body>
+</html>
