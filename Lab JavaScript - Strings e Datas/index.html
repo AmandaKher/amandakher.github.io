@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lab JavaScript - Strings e Datas</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <p>Selecione um exercício para executar.</p>
+        </header>
+
+        <main>
+            <div class="buttons">
+                <button onclick="exibirExercicio(1)">Exercício 1</button>
+                <button onclick="exibirExercicio(2)">Exercício 2</button>
+                <button onclick="exibirExercicio(3)">Exercício 3</button>
+                <button onclick="exibirExercicio(4)">Exercício 4</button>
+                <button onclick="exibirExercicio(5)">Exercício 5</button>
+                <button onclick="exibirExercicio(6)">Exercício 6</button>
+                <button onclick="exibirExercicio(7)">Exercício 7</button>
+                <button onclick="exibirExercicio(8)">Exercício 8</button>
+                <button onclick="exibirExercicio(9)">Exercício 9</button>
+                <button onclick="exibirExercicio(10)">Exercício 10</button>
+            </div>
+
+            <div id="exercicio" class="exercicio-container">
+                <h2>Descrição do Exercício</h2>
+                <p id="descricao">Selecione um exercício acima para ver sua descrição e executá-lo.</p>
+
+                <div id="inputArea"></div>
+                <button id="executar" onclick="executarExercicio()" style="display: none;">Executar</button>
+                <div id="resultado"></div>
+            </div>
+        </main>
+    <div>
+        <script>
+            const descriptions = {
+                1: "Inverte os caracteres de uma frase.",
+                2: "Destaca as vogais de uma frase.",
+                3: "Conta a ocorrência de cada palavra em um texto.",
+                4: "Indica a palavra mais frequente em um texto.",
+                5: "Substitui palavras em um texto.",
+                6: "Calcula quantos dias de vida uma pessoa possui.",
+                7: "Formata uma data por extenso.",
+                8: "Calcula a diferença em semanas entre duas datas.",
+                9: "Classifica a força de uma senha.",
+                10: "Codifica uma frase usando uma estratégia específica."
+            };
+    
+            let selectedExercicio = null;
+    
+            function exibirExercicio(numero) {
+                const descricao = document.getElementById("descricao");
+                const inputArea = document.getElementById("inputArea");
+                const executarBtn = document.getElementById("executar");
+    
+                descricao.textContent = descriptions[numero];
+                inputArea.innerHTML = "";
+                executarBtn.style.display = "block";
+                selectedExercicio = numero;
+    
+
+                if (numero === 1 || numero === 2 || numero === 10) {
+                    inputArea.innerHTML = '<input type="text" id="texto" placeholder="Digite uma frase">';
+                } else if (numero === 3 || numero === 4 || numero === 5) {
+                    inputArea.innerHTML = '<textarea id="texto" placeholder="Digite um texto"></textarea>';
+                    if (numero === 5) {
+                        inputArea.innerHTML += '<input type="text" id="procurar" placeholder="Palavra a procurar">';
+                        inputArea.innerHTML += '<input type="text" id="substituir" placeholder="Palavra substituta">';
+                    }
+                } else if (numero === 6 || numero === 7 || numero === 8) {
+                    inputArea.innerHTML = '<input type="date" id="data1">';
+                    if (numero === 8) {
+                        inputArea.innerHTML += '<input type="date" id="data2">';
+                    }
+                } else if (numero === 9) {
+                    inputArea.innerHTML = '<input type="text" id="senha" placeholder="Digite uma senha">';
+                }
+            }
+    
+            function executarExercicio() {
+                const resultado = document.getElementById("resultado");
+                resultado.innerHTML = "";
+    
+                if (selectedExercicio === 1) {
+                    const texto = document.getElementById("texto").value;
+                    resultado.textContent = texto.split("").reverse().join("");
+                } else if (selectedExercicio === 2) {
+                    const texto = document.getElementById("texto").value;
+                    resultado.innerHTML = texto.replace(/[aeiou]/gi, (match) => `<strong>${match}</strong>`);
+                } else if (selectedExercicio === 3) {
+                    const texto = document.getElementById("texto").value;
+                    const palavras = texto.split(/\W+/);
+                    const contagem = {};
+                    palavras.forEach((palavra) => {
+                        contagem[palavra] = (contagem[palavra] || 0) + 1;
+                    });
+                    resultado.textContent = JSON.stringify(contagem);
+                }else if (selectedExercicio === 4) {
+                const texto = document.getElementById("texto").value;
+                const palavras = texto.split(/\W+/);
+                const contagem = {};
+                let maisFrequente = "";
+                let maxFreq = 0;
+                palavras.forEach((palavra) => {
+                    contagem[palavra] = (contagem[palavra] || 0) + 1;
+                    if (contagem[palavra] > maxFreq) {
+                        maxFreq = contagem[palavra];
+                        maisFrequente = palavra;
+                    }
+                });
+                resultado.textContent = `Palavra mais frequente: ${maisFrequente}, ocorrências: ${maxFreq}`;
+            } else if (selectedExercicio === 5) {
+                const texto = document.getElementById("texto").value;
+                const procurar = document.getElementById("procurar").value;
+                const substituir = document.getElementById("substituir").value;
+                resultado.textContent = texto.replace(new RegExp(procurar, "gi"), substituir);
+            } else if (selectedExercicio === 6) {
+                const data = new Date(document.getElementById("data1").value);
+                const hoje = new Date();
+                const diferenca = Math.floor((hoje - data) / (1000 * 60 * 60 * 24));
+                resultado.textContent = `Você viveu ${diferenca} dias até hoje.`;
+            } else if (selectedExercicio === 7) {
+                const data = new Date(document.getElementById("data1").value);
+                const opcoes = { year: 'numeric', month: 'long', day: 'numeric' };
+                resultado.textContent = data.toLocaleDateString('pt-BR', opcoes);
+            } else if (selectedExercicio === 8) {
+                const data1 = new Date(document.getElementById("data1").value);
+                const data2 = new Date(document.getElementById("data2").value);
+                const diferenca = Math.abs(data2 - data1);
+                const semanas = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 7));
+                resultado.textContent = `A diferença é de ${semanas} semanas.`;
+            } else if (selectedExercicio === 9) {
+                const senha = document.getElementById("senha").value;
+                if (/^[a-zA-Z]+$/.test(senha)) {
+                    resultado.textContent = "Senha fraca (vermelho).";
+                } else if (/^[a-zA-Z0-9]+$/.test(senha)) {
+                    resultado.textContent = "Senha moderada (laranja).";
+                } else if (/^[a-zA-Z0-9@#$%^&*()_+\-=]+$/.test(senha)) {
+                    resultado.textContent = "Senha forte (verde).";
+                } else {
+                    resultado.textContent = "Senha inválida.";
+                }
+            } else if (selectedExercicio === 10) {
+                const texto = document.getElementById("texto").value;
+                const codificado = texto.replace(/[TtEePpOoRr]/g, (letra) => {
+                    const mapa = {
+                        T: "P", p: "t", E: "O", o: "e", R: "E", e: "r", O: "R", r: "o" };
+                    return mapa[letra] || letra;
+                });
+                resultado.textContent = codificado;
+            }
+        }
+        
+        </script>
+</body>
+</html>
