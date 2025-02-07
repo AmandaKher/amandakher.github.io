@@ -1,0 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.menu-item {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 5px;
+    display: inline-block;
+    background-color: #f8f8f8;
+}
+.menu-item:hover {
+    background-color: #ddd;
+}

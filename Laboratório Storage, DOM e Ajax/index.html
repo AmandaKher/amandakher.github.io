@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Interativo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="menu">
+            <ul>
+                
+                <li><a href="./Livraria/index.html" onclick="mostrarConteudo('livraria')">Livraria</a></li>
+                <li><a href="./Cafeteria/index.html" onclick="mostrarConteudo('cafeteria')">Cafeteria</a></li>
+                <li><a href="./Receitas/index.html" onclick="mostrarConteudo('receitas')">Receitas</a></li>
+                <li><a href="./Cep/index.html" onclick="mostrarConteudo('cep')">CEP</a></li>
+            </ul>
+        </div>
+
+        
+        <div class="conteudo">
+            <div id="livraria" class="conteudo-item">Bem-vindo à Livraria!</div>
+            <div id="cafeteria" class="conteudo-item">Descubra nossa Cafeteria!</div>
+            <div id="receitas" class="conteudo-item">Veja nossas Receitas!</div>
+            <div id="cep" class="conteudo-item">Informe o CEP para buscar!</div>
+        </div>
+    </div>
+
+    <script>
+        
+        function mostrarConteudo(conteudo) {
+            
+            const itens = document.querySelectorAll('.conteudo-item');
+            itens.forEach(item => {
+                item.style.display = 'none';
+            });
+            
+            document.getElementById(conteudo).style.display = 'block';
+        }
+
+        mostrarConteudo('livraria');
+    </script>
+</body>
+</html>

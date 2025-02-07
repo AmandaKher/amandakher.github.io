@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria - Cardápio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Cardápio Eletrônico</h1>
+    <div id="menu"></div>
+    <h2>Pedidos</h2>
+    <ul id="pedidos"></ul>
+    <h3>Total - <span id="total">0</span></h3>
+
+    <script>
+        $(document).ready(function() {
+            var menuItens = [
+                "Capuccino", "Espresso", "Frapuccino", "Chococcino", "Chocolate Quente", 
+                "Frapê", "Suco de Laranja", "Açaí", "Bolo de Laranja"
+            ];
+            var total = 0;
+            
+            menuItens.forEach(function(item) {
+                $("#menu").append('<div class="menu-item" data-nome="' + item + '">' + item + '</div>');
+            });
+            
+            $(".menu-item").click(function() {
+                var nomeItem = $(this).data("nome");
+                $("#pedidos").append('<li>' + nomeItem + '</li>');
+                total++;
+                $("#total").text(total);
+            });
+        });
+    </script>
+</body>
+</html>

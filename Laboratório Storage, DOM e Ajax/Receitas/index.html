@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Receitas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Receitas</h1>
+        <div id="recipes-list" class="recipes"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const recipesList = document.getElementById("recipes-list");
+
+        fetch("https://rafaelescalfoni.github.io/desenv_web/receitas.json")
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(recipe => {
+                    const recipeItem = document.createElement("div");
+                    recipeItem.classList.add("recipe");
+                    recipeItem.innerHTML = `<h3>${recipe.nome}</h3><p>${recipe.descricao}</p>`;
+                    recipesList.appendChild(recipeItem);
+                });
+            })
+            .catch(error => console.error("Erro ao carregar as receitas:", error));
+        });
+    </script>
+</body>
+</html>
